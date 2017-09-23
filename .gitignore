@@ -29,3 +29,5 @@ RemoteSystemsTempFiles/.project
 .gradle/2.4/taskArtifacts/cache.properties
 
 *.lock
+
+configuration-service/bin/bootstrap.yml
