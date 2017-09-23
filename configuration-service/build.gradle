@@ -43,10 +43,19 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.4'
 }
 
+docker {
+    maintainer = 'Daniel Marlow'
+    baseImage = 'frolvlad/alpine-oraclejdk8:slim'
+}
+
 task image(type: Docker, dependsOn: build){
 	push = false
 	applicationName = jar.baseName
-	dockerfile = file('src/main/docker/Dockerfile')
+    volume('/tmp')
+    exposePort(8888)
+    addFile("configuration-service.jar", "app.jar")
+    runCommand("sh -c 'touch /app.jar'")
+    entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"])
 	doFirst{
 		copy {
 			from jar
