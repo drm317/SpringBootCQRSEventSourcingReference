@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('se.transmode.gradle:gradle-docker:1.2')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+
+group = 'drm3107'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	springCloudVersion = 'Dalston.SR3'
+}
+
+dependencies {
+	compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '4.2'
+}
+
+docker {
+    maintainer = 'Daniel Marlow'
+    baseImage = 'frolvlad/alpine-oraclejdk8:slim'
+}
+
+task image(type: Docker, dependsOn: build){
+	push = false
+	applicationName = jar.baseName
+    volume('/tmp')
+    exposePort(8900)
+    addFile("order-service.jar", "app.jar")
+    runCommand("sh -c 'touch /app.jar'")
+    entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"])
+	doFirst{
+		copy {
+			from jar
+			into stageDir
+		}
+	}
+}

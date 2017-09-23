@@ -1,5 +1,19 @@
 version: '3'
 services:
+  mongodb:
+    image: mongo:3.0.15
+    container_name: mongodb
+    ports:
+     - "27017:27017"
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+     - "5672:5672"
+     - "15672:15672"
+    environment:
+     - RABBITMQ_DEFAULT_USER=test
+     - RABBITMQ_DEFAULT_PASS=password
   configuration-service:
     image: drm3107/configuration-service
     container_name: configuration-service
@@ -12,3 +26,15 @@ services:
     container_name: service-registry
     ports:
      - "8761:8761"
+  order-service:
+    image: drm3107/order-service
+    container_name: order-service
+    depends_on:
+     - mongodb
+     - rabbitmq
+     - service-registry
+     - configuration-service
+    ports:
+      - "8900"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production
