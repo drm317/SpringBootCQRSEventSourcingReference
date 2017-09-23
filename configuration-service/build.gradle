@@ -16,8 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 
-group = 'com.cloudnative.reference'
-version = '0.0.1-SNAPSHOT'
+group = 'drm3107'
 sourceCompatibility = 1.8
 
 repositories {
