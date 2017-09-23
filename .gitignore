@@ -31,3 +31,6 @@ RemoteSystemsTempFiles/.project
 *.lock
 
 configuration-service/bin/bootstrap.yml
+/.recommenders/
+
+.gradle/buildOutputCleanup/cache.properties

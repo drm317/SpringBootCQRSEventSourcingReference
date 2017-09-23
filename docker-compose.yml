@@ -1,9 +1,14 @@
 version: '3'
 services:
-  config:
+  configuration-service:
     image: drm3107/configuration-service
     container_name: configuration-service
     ports:
      - "8888:8888"
     environment:
      - SPRING_PROFILES_ACTIVE=production
+  service-registry:
+    image: drm3107/service-registry
+    container_name: service-registry
+    ports:
+     - "8761:8761"

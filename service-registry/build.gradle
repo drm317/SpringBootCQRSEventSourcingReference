@@ -29,7 +29,7 @@ ext {
 }
 
 dependencies {
-	compile('org.springframework.cloud:spring-cloud-config-server')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
@@ -52,8 +52,8 @@ task image(type: Docker, dependsOn: build){
 	push = false
 	applicationName = jar.baseName
     volume('/tmp')
-    exposePort(8888)
-    addFile("configuration-service.jar", "app.jar")
+    exposePort(8761)
+    addFile("service-registry.jar", "app.jar")
     runCommand("sh -c 'touch /app.jar'")
     entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"])
 	doFirst{

@@ -1,1 +1,1 @@
-include "configuration-service"
+include "configuration-service", "service-registry"
