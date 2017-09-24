@@ -4,6 +4,7 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -28,9 +29,17 @@ ext {
 }
 
 dependencies {
-	compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile('org.mongodb:mongo-java-driver:2.14.3')
+    compile("org.axonframework:axon-amqp:2.4.3")
+    compile("org.axonframework:axon-mongo:2.4.3")
+    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
     compile("org.springframework.cloud:spring-cloud-starter-config")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+	testCompile("org.axonframework:axon-test:2.4.3")
 }
 
 dependencyManagement {

@@ -23,7 +23,6 @@ repositories {
 	mavenCentral()
 }
 
-
 ext {
 	springCloudVersion = 'Dalston.SR3'
 }

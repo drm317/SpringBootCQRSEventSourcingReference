@@ -1,8 +1,11 @@
-version: '3'
+version: '2'
 services:
   mongodb:
-    image: mongo:3.0.15
+    image: mongo:2.4
     container_name: mongodb
+    command: mongod --smallfiles
+    volumes:
+     - /Users/daniel/Documents/Development/java/docker-map:/data/db
     ports:
      - "27017:27017"
   rabbitmq:
@@ -12,15 +15,13 @@ services:
      - "5672:5672"
      - "15672:15672"
     environment:
-     - RABBITMQ_DEFAULT_USER=test
-     - RABBITMQ_DEFAULT_PASS=password
+     - RABBITMQ_DEFAULT_USER=guest
+     - RABBITMQ_DEFAULT_PASS=guest
   configuration-service:
     image: drm3107/configuration-service
     container_name: configuration-service
     ports:
      - "8888:8888"
-    environment:
-     - SPRING_PROFILES_ACTIVE=production
   service-registry:
     image: drm3107/service-registry
     container_name: service-registry
@@ -35,6 +36,4 @@ services:
      - service-registry
      - configuration-service
     ports:
-      - "8900"
-    environment:
-     - SPRING_PROFILES_ACTIVE=production
+      - "8900:8900"
