@@ -22,6 +22,8 @@ services:
     container_name: configuration-service
     ports:
      - "8888:8888"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production
   service-registry:
     image: drm3107/service-registry
     container_name: service-registry
@@ -30,10 +32,12 @@ services:
   order-service:
     image: drm3107/order-service
     container_name: order-service
-    depends_on:
+    links:
      - mongodb
      - rabbitmq
      - service-registry
      - configuration-service
     ports:
       - "8900:8900"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production

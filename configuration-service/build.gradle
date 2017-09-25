@@ -16,6 +16,11 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 
+jar {
+	baseName = 'configuration-service'
+	archiveName = 'configuration-service.jar'
+}
+
 group = 'drm3107'
 sourceCompatibility = 1.8
 
@@ -52,9 +57,9 @@ task image(type: Docker, dependsOn: build){
 	applicationName = jar.baseName
     volume('/tmp')
     exposePort(8888)
-    addFile("configuration-service.jar", "app.jar")
-    runCommand("sh -c 'touch /app.jar'")
-    entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"])
+    addFile("configuration-service.jar", "configuration-service.jar")
+    runCommand("sh -c 'touch /configuration-service.jar'")
+    entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar","/configuration-service.jar"])
 	doFirst{
 		copy {
 			from jar

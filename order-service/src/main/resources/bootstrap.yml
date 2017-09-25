@@ -5,7 +5,7 @@ spring:
     name: order-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://configuration-service:8888
       retry:
         initialInterval: 2000
         maxAttempts: 30
