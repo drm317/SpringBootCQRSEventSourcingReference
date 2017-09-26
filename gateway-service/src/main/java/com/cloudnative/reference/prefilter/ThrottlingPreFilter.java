@@ -18,6 +18,7 @@ public class ThrottlingPreFilter extends ZuulFilter {
 
 	private final HttpStatus tooManyRequests = HttpStatus.TOO_MANY_REQUESTS;
 
+	// Permit a request only once every 10 seconds
 	private final RateLimiter rateLimiter = RateLimiter.create(1.0D / 10.0D);
 
 	@Override
