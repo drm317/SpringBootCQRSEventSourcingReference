@@ -29,6 +29,16 @@ services:
     container_name: service-registry
     ports:
      - "8761:8761"
+  gateway-service:
+    image: drm3107/gateway-service
+    container_name: gateway-service
+    ports:
+     - "8080:8080"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production
+    depends_on:
+     - service-registry
+     - configuration-service
   order-service:
     image: drm3107/order-service
     container_name: order-service
