@@ -1,1 +1,1 @@
-include "configuration-service", "service-registry", "order-service", "gateway-service"
+include "configuration-service", "service-registry", "order-service", "gateway-service", "admin-service"

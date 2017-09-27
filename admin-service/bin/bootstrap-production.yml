@@ -1,0 +1,12 @@
+server:
+  port: 8887
+spring:
+  application:
+    name: admin-service
+  cloud:
+    config:
+      uri: http://configuration-service:8888
+      failFast: true
+      retry:
+        initialInterval: 2000
+        maxAttempts: 30

@@ -51,3 +51,13 @@ services:
       - "8900:8900"
     environment:
      - SPRING_PROFILES_ACTIVE=production
+  admin-service:
+    image: drm3107/admin-service
+    container_name: admin-service
+    links:
+     - service-registry
+     - configuration-service
+    ports:
+      - "8887:8887"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production
