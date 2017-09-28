@@ -1,0 +1,12 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: hystrix-dashboard-service
+  cloud:
+    config:
+      uri: http://configuration-service:8888
+      failFast: true
+      retry:
+        initialInterval: 2000
+        maxAttempts: 30

@@ -61,3 +61,13 @@ services:
       - "8887:8887"
     environment:
      - SPRING_PROFILES_ACTIVE=production
+  hystrix-dashboard-service:
+    image: drm3107/hystrix-dashboard-service
+    container_name: hystrix-dashboard-service
+    links:
+     - service-registry
+     - gateway-service
+    ports:
+      - "8020:8020"
+    environment:
+     - SPRING_PROFILES_ACTIVE=production
