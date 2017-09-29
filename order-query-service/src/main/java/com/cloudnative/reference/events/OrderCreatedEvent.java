@@ -1,12 +1,11 @@
-package com.cloudnative.reference;
+package com.cloudnative.reference.events;
 
 public class OrderCreatedEvent {
 
 	private String orderId;
-	
+
 	private String description;
 
-	
 	public OrderCreatedEvent(String orderId, String description) {
 		super();
 		this.orderId = orderId;
@@ -28,6 +27,5 @@ public class OrderCreatedEvent {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 }

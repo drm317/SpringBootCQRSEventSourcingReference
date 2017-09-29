@@ -7,7 +7,7 @@ import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
 import org.springframework.util.Assert;
 
 import com.cloudnative.reference.CreateOrderCommand;
-import com.cloudnative.reference.OrderCreatedEvent;
+import com.cloudnative.reference.events.OrderCreatedEvent;
 
 
 @SuppressWarnings("rawtypes")
