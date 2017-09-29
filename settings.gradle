@@ -1,1 +1,1 @@
-include "configuration-service", "service-registry", "order-service", "gateway-service", "admin-service", "hystrix-dashboard-service"
+include "configuration-service", "service-registry", "order-service", "order-query-service", "gateway-service", "admin-service", "hystrix-dashboard-service"

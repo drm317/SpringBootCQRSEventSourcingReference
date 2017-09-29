@@ -1,0 +1,11 @@
+server:
+  port: 8901
+spring:
+  application:
+    name: order-query-service
+  cloud:
+    config:
+      uri: http://configuration-service:8888
+      retry:
+        initialInterval: 2000
+        maxAttempts: 30
