@@ -5,11 +5,13 @@ import org.axonframework.eventhandling.replay.ReplayAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cloudnative.reference.domain.Order;
 import com.cloudnative.reference.events.OrderCreatedEvent;
 import com.cloudnative.reference.repository.OrderRepository;
 
+@Component
 public class OrderViewEventHandler implements ReplayAware {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OrderViewEventHandler.class);

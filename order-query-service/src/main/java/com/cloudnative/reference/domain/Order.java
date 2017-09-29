@@ -7,25 +7,26 @@ import javax.persistence.Id;
 public class Order {
 
 	@Id
-    private String id;
+    private String orderId;
 
     private String description;
 
-	public Order(String id, String description) {
+	public Order(String orderId, String description) {
 		super();
-		this.id = id;
+		this.orderId = orderId;
 		this.description = description;
 	}
 
 	public Order() {
 	}
 
-	public String getId() {
-		return id;
+
+	public String getOrderId() {
+		return orderId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getDescription() {

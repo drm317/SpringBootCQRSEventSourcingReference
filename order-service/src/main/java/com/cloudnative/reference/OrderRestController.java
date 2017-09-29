@@ -2,16 +2,14 @@ package com.cloudnative.reference;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Map;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,13 +23,13 @@ public class OrderRestController {
 		this.commandGateway = cg;
 	}
 
-	@PostMapping
-	public void createOrder(@RequestBody Map<String, String> body, HttpServletResponse response) {
-		String id = UUID.randomUUID().toString();
-		CreateOrderCommand command = new CreateOrderCommand(id, body.get("description"));	
-        commandGateway.sendAndWait(command);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return;
+	@RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
+	public void add(@PathVariable(value = "id") String id,
+			@RequestParam(value = "description", required = true) String description, HttpServletResponse response) {
+		CreateOrderCommand command = new CreateOrderCommand(id, description);
+		commandGateway.sendAndWait(command);
+		response.setStatus(HttpServletResponse.SC_CREATED);
+		return;
 	}
 
 }

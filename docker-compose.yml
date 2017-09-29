@@ -51,18 +51,6 @@ services:
       - "8900:8900"
     environment:
      - SPRING_PROFILES_ACTIVE=production
-  order-query-service:
-    image: drm3107/order-query-service
-    container_name: order-query-service
-    links:
-     - mongodb
-     - rabbitmq
-     - service-registry
-     - configuration-service
-    ports:
-      - "8901:8901"
-    environment:
-     - SPRING_PROFILES_ACTIVE=production
   admin-service:
     image: drm3107/admin-service
     container_name: admin-service

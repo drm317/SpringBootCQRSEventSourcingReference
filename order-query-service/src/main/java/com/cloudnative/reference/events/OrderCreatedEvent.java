@@ -1,10 +1,16 @@
 package com.cloudnative.reference.events;
 
-public class OrderCreatedEvent {
+import java.io.Serializable;
+
+public class OrderCreatedEvent implements Serializable {
 
 	private String orderId;
 
 	private String description;
+	
+	public OrderCreatedEvent() {
+
+	}
 
 	public OrderCreatedEvent(String orderId, String description) {
 		super();

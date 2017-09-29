@@ -9,5 +9,5 @@ import com.cloudnative.reference.domain.Order;
 
 @RepositoryRestResource(collectionResourceRel = "order", path = "order")
 public interface OrderRepository extends ReadOnlyPagingAndSortingRepository {
-    public List<Order> findByDescription(@Param("description") boolean description);
+    public List<Order> findByDescription(@Param("description") String description);
 }

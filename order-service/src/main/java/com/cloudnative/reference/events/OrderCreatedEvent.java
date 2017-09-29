@@ -2,24 +2,25 @@ package com.cloudnative.reference.events;
 
 public class OrderCreatedEvent {
 
-	private String orderId;
+	private String id;
 	
 	private String description;
 
 	
-	public OrderCreatedEvent(String orderId, String description) {
+	public OrderCreatedEvent(String id, String description) {
 		super();
-		this.orderId = orderId;
+		this.id = id;
 		this.description = description;
 	}
 
-	public String getOrderId() {
-		return orderId;
+	public String getId() {
+		return id;
 	}
 
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setId(String id) {
+		this.id = id;
 	}
+
 
 	public String getDescription() {
 		return description;
