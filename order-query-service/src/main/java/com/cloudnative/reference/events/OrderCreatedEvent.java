@@ -34,4 +34,5 @@ public class OrderCreatedEvent implements Serializable {
 		this.description = description;
 	}
 	
+	
 }

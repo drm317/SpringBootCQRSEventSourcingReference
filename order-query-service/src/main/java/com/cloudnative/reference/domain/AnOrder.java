@@ -1,20 +1,22 @@
-package com.cloudnative.reference.events;
+package com.cloudnative.reference.domain;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-public class OrderCreatedEvent implements Serializable {
+@Entity
+public class AnOrder {
 
-	private String id;
+	@Id
+    private String id;
 	
 	private String description;
 
-	
-	public OrderCreatedEvent() {
-	}
-
-	public OrderCreatedEvent(String id, String description) {
+	public AnOrder(String id, String description) {
 		this.id = id;
 		this.description = description;
+	}
+
+	public AnOrder() {
 	}
 
 	public String getId() {
@@ -24,7 +26,6 @@ public class OrderCreatedEvent implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	public String getDescription() {
 		return description;
