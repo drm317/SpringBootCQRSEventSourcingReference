@@ -16,60 +16,60 @@ import org.springframework.context.annotation.Configuration;
 @AnnotationDriven
 public class RabbitConfiguration {
 
-	@Value("${spring.rabbitmq.hostname}")
-    private String hostname;
+  @Value("${spring.rabbitmq.hostname}")
+  private String hostname;
 
-    @Value("${spring.rabbitmq.username}")
-    private String username;
+  @Value("${spring.rabbitmq.username}")
+  private String username;
 
-    @Value("${spring.rabbitmq.password}")
-    private String password;
+  @Value("${spring.rabbitmq.password}")
+  private String password;
 
-    @Value("${spring.application.exchange}")
-    private String exchangeName;
+  @Value("${spring.application.exchange}")
+  private String exchangeName;
 
-    @Value("${spring.application.queue}")
-    private String queueName;
+  @Value("${spring.application.queue}")
+  private String queueName;
 
-    @Value("${spring.application.index}")
-    private Integer index;
+  @Value("${spring.application.index}")
+  private Integer index;
 
-    @Bean
-    public String uniqueQueueName() {
-        return queueName + "." + index;
-    }
+  @Bean
+  public String uniqueQueueName() {
+    return queueName + "." + index;
+  }
 
-    @Bean
-    Queue eventStream(String uniqueQueueName) {
-        return new Queue(uniqueQueueName, false, false, true);
-    }
+  @Bean
+  Queue eventStream(String uniqueQueueName) {
+    return new Queue(uniqueQueueName, false, false, true);
+  }
 
-    @Bean
-    FanoutExchange eventBusExchange() {
-        return new FanoutExchange(exchangeName, true, false);
-    }
+  @Bean
+  FanoutExchange eventBusExchange() {
+    return new FanoutExchange(exchangeName, true, false);
+  }
 
-    @Bean
-    Binding binding(String uniqueQueueName) {
-        return new Binding(uniqueQueueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
-    }
+  @Bean
+  Binding binding(String uniqueQueueName) {
+    return new Binding(uniqueQueueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
+  }
 
-    @Bean
-    ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname);
-        connectionFactory.setUsername(username);
-        connectionFactory.setPassword(password);
-        return connectionFactory;
-    }
+  @Bean
+  ConnectionFactory connectionFactory() {
+    CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname);
+    connectionFactory.setUsername(username);
+    connectionFactory.setPassword(password);
+    return connectionFactory;
+  }
 
-    @Bean
-    @Required
-    RabbitAdmin rabbitAdmin(String uniqueQueueName) {
-        RabbitAdmin admin = new RabbitAdmin(connectionFactory());
-        admin.setAutoStartup(true);
-        admin.declareExchange(eventBusExchange());
-        admin.declareQueue(eventStream(uniqueQueueName));
-        admin.declareBinding(binding(uniqueQueueName));
-        return admin;
-    }
+  @Bean
+  @Required
+  RabbitAdmin rabbitAdmin(String uniqueQueueName) {
+    RabbitAdmin admin = new RabbitAdmin(connectionFactory());
+    admin.setAutoStartup(true);
+    admin.declareExchange(eventBusExchange());
+    admin.declareQueue(eventStream(uniqueQueueName));
+    admin.declareBinding(binding(uniqueQueueName));
+    return admin;
+  }
 }

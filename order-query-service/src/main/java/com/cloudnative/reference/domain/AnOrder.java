@@ -6,33 +6,33 @@ import javax.persistence.Id;
 @Entity
 public class AnOrder {
 
-	@Id
-    private String id;
-	
-	private String description;
+  @Id
+  private String id;
 
-	public AnOrder(String id, String description) {
-		this.id = id;
-		this.description = description;
-	}
+  private String description;
 
-	public AnOrder() {
-	}
+  public AnOrder(String id, String description) {
+    this.id = id;
+    this.description = description;
+  }
 
-	public String getId() {
-		return id;
-	}
+  public AnOrder() {
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
 }
