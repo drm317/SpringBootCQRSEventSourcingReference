@@ -1,0 +1,62 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'drm3107'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+  integrationTestCompile.extendsFrom testCompile
+  integrationTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+    testCompile("com.jayway.restassured:rest-assured:2.9.0")
+    testCompile("org.hamcrest:hamcrest-all:1.3")
+    testCompile("junit:junit:4.11")
+}
+
+
+sourceSets {
+  integrationTest {
+    compileClasspath += main.output + test.output
+    runtimeClasspath += main.output + test.output
+
+    java.srcDir file('src/integration-test/java')
+    resources.srcDir file('src/integration-test/resources')
+  }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+task integrationTest(type: Test) {
+  testClassesDir = sourceSets.integrationTest.output.classesDir
+  classpath = sourceSets.integrationTest.runtimeClasspath
+  outputs.upToDateWhen { false }
+
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+test.systemProperties = System.properties;
+integrationTest.systemProperties = System.properties;
