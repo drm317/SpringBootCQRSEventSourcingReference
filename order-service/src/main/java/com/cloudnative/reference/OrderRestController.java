@@ -4,7 +4,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.axonframework.commandhandling.CommandExecutionException;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.repository.ConcurrencyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +29,18 @@ public class OrderRestController {
   public void add(@PathVariable(value = "id") String id,
       @RequestParam(value = "description", required = true) String description,
       HttpServletResponse response) {
-    CreateOrderCommand command = new CreateOrderCommand(id, description);
-    commandGateway.sendAndWait(command);
-    response.setStatus(HttpServletResponse.SC_CREATED);
-    return;
+    try {
+      CreateOrderCommand command = new CreateOrderCommand(id, description);
+      commandGateway.sendAndWait(command);
+      response.setStatus(HttpServletResponse.SC_CREATED);
+      return;
+    } catch (CommandExecutionException cex) {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+      if (null != cex.getCause()) {
+        if (cex.getCause() instanceof ConcurrencyException) {
+          response.setStatus(HttpServletResponse.SC_CONFLICT);
+        }
+      }
+    }
   }
-
 }

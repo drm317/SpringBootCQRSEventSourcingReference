@@ -35,7 +35,7 @@ public class EndToEndTest {
 
   @After
   public void afterEach() throws InterruptedException {
-    TimeUnit.SECONDS.sleep(10l);
+    TimeUnit.SECONDS.sleep(11l);
   }
 
   // Create an order with command service
@@ -58,5 +58,14 @@ public class EndToEndTest {
         .get(ORDERS_QRY_BASE_PATH + "/{id}", id).then()
         .statusCode(HttpStatus.SC_OK)
         .body("description", Matchers.is(description));
+  }
+
+  @Test
+  public void testC_CreatingADuplicateOrderCausesAConflict() {
+    given().port(PORT_FOR_GATEWAY).header("Content-Type", "application/json")
+        .when()
+        .post(ORDERS_CMD_BASE_PATH + CMD_ORDER_CREATE
+            + "/{id}?description={description}", id, description)
+        .then().statusCode(HttpStatus.SC_CONFLICT);
   }
 }
