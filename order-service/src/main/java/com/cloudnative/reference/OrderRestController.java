@@ -16,20 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/order", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public class OrderRestController {
 
-	private final CommandGateway commandGateway;
+  private final CommandGateway commandGateway;
 
-	@Autowired
-	OrderRestController(CommandGateway cg) {
-		this.commandGateway = cg;
-	}
+  @Autowired
+  OrderRestController(CommandGateway cg) {
+    this.commandGateway = cg;
+  }
 
-	@RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
-	public void add(@PathVariable(value = "id") String id,
-			@RequestParam(value = "description", required = true) String description, HttpServletResponse response) {
-		CreateOrderCommand command = new CreateOrderCommand(id, description);
-		commandGateway.sendAndWait(command);
-		response.setStatus(HttpServletResponse.SC_CREATED);
-		return;
-	}
+  @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
+  public void add(@PathVariable(value = "id") String id,
+      @RequestParam(value = "description", required = true) String description,
+      HttpServletResponse response) {
+    CreateOrderCommand command = new CreateOrderCommand(id, description);
+    commandGateway.sendAndWait(command);
+    response.setStatus(HttpServletResponse.SC_CREATED);
+    return;
+  }
 
 }

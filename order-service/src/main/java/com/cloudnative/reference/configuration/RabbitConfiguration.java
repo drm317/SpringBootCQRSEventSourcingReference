@@ -15,58 +15,61 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
 
-	@Value("${spring.rabbitmq.hostname}")
-	private String hostname;
+  @Value("${spring.rabbitmq.hostname}")
+  private String hostname;
 
-	@Value("${spring.rabbitmq.username}")
-	private String username;
+  @Value("${spring.rabbitmq.username}")
+  private String username;
 
-	@Value("${spring.rabbitmq.password}")
-	private String password;
+  @Value("${spring.rabbitmq.password}")
+  private String password;
 
-	@Value("${spring.application.exchange}")
-	private String exchangeName;
+  @Value("${spring.application.exchange}")
+  private String exchangeName;
 
-	@Value("${spring.application.queue}")
-	private String queueName;
+  @Value("${spring.application.queue}")
+  private String queueName;
 
-	@Bean
-	Queue defaultStream() {
-		return new Queue(queueName, true);
-	}
+  @Bean
+  Queue defaultStream() {
+    return new Queue(queueName, true);
+  }
 
-	@Bean
-	FanoutExchange eventBusExchange() {
-		return new FanoutExchange(exchangeName, true, false);
-	}
+  @Bean
+  FanoutExchange eventBusExchange() {
+    return new FanoutExchange(exchangeName, true, false);
+  }
 
-	@Bean
-	Binding binding() {
-		return new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, "*.*", null);
-	}
+  @Bean
+  Binding binding() {
+    return new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName,
+        "*.*", null);
+  }
 
-	@Bean
-	ConnectionFactory connectionFactory() {
-		CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname);
-		connectionFactory.setUsername(username);
-		connectionFactory.setPassword(password);
-		return connectionFactory;
-	}
+  @Bean
+  ConnectionFactory connectionFactory() {
+    CachingConnectionFactory connectionFactory = new CachingConnectionFactory(
+        hostname);
+    connectionFactory.setUsername(username);
+    connectionFactory.setPassword(password);
+    return connectionFactory;
+  }
 
-	@Bean
-	@Required
-	RabbitAdmin rabbitAdmin() {
-		RabbitAdmin admin = new RabbitAdmin(connectionFactory());
-		admin.setAutoStartup(true);
-		admin.declareExchange(eventBusExchange());
-		admin.declareQueue(defaultStream());
-		admin.declareBinding(binding());
-		return admin;
-	}
+  @Bean
+  @Required
+  RabbitAdmin rabbitAdmin() {
+    RabbitAdmin admin = new RabbitAdmin(connectionFactory());
+    admin.setAutoStartup(true);
+    admin.declareExchange(eventBusExchange());
+    admin.declareQueue(defaultStream());
+    admin.declareBinding(binding());
+    return admin;
+  }
 
-	@Bean
-	RabbitTransactionManager transactionManager() {
-		RabbitTransactionManager txMgr = new RabbitTransactionManager(connectionFactory());
-		return txMgr;
-	}
+  @Bean
+  RabbitTransactionManager transactionManager() {
+    RabbitTransactionManager txMgr = new RabbitTransactionManager(
+        connectionFactory());
+    return txMgr;
+  }
 }
