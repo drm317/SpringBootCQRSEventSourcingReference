@@ -23,3 +23,16 @@ The code was developed and tested with the Spring Tool Suite IDE running on MacO
 ## Running this Reference Implementation
 
 ### 1. Build the Docker Containers
+
+Clone the Git repository to a directory
+
+```bash
+git clone https://github.com/drm317/cloud-native-reference.git
+```
+
+Then build the code and all the required Docker container images
+
+```bash
+cd cloud-native-reference
+./gradlew clean image
+```
