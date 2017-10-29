@@ -39,6 +39,18 @@ cd cloud-native-reference
 
 ## 2. Start the System
 
+There are several Docker containers that compose the reference system.
+
+* mongodb - MongoDB NoSQL database service for the Axon Framework event store
+* rabbitmq - RabbitMQ service for Axon Framework messaging
+* configuration-service - Spring Cloud external configuration service
+* service-registry - Spring Cloud service registry and discovery service
+* gateway-service - Spring Boot gateway service with a Netflix OSS Zuul router and Hystrix circuit breaker
+* order-service - Spring Boot CQRS command service for creating (domain) orders
+* order-query-service - Spring Boot CQRS query service for querying (domain) orders
+* admin-service - Spring Cloud Admin Service for service monitoring
+* hystrix-dashboard-service - Netflix OSS Hystrix dashboard service
+
 ## 3. Execute the Integration Tests
 
 The integration tests include an end-to-end test and system health check. They require the mongodb, rabbitmq, configuration-service, service-registry, gateway-service, order-service and order-query-service containers to be up and running.
