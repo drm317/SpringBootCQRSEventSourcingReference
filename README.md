@@ -39,15 +39,17 @@ cd cloud-native-reference
 
 ## 2. Start the System
 
-## 3. Perform an Integration Test
+## 3. Execute the Integration Tests
 
-Run the integration tests with the following...
+The integration tests include an end-to-end test and system health check. They require the mongodb, rabbitmq, configuration-service, service-registry, gateway-service, order-service and order-query-service containers to be up and running.
+
+Run the integration tests with the following:
 
 ```bash
 ./gradlew integration-test:integrationTest
 ```
 
-The architecture makes use of a design pattern called 'event sourcing' with 'eventual consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service. In addition, a demonstration throttling filter in the Gateway service limits traffic to one request every 10 seconds.
+The architecture makes use of a design pattern called 'event sourcing' with 'eventual consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service. In addition, a demonstration throttling filter in the Gateway service currently limits traffic to one request every 10 seconds.
 
 ## 4. Clean the Docker Containers
 
