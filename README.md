@@ -19,3 +19,7 @@ This reference implementation can be run through a series of Docker containers. 
 * Gradle
 
 The code was developed and tested with the Spring Tool Suite IDE running on MacOS 10.12.6 Sierra. A machine with at least 8GB is required to run all the containers concurrently.
+
+## Running this Reference Implementation
+
+### 1. Build the Docker Containers
