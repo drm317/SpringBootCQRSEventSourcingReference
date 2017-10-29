@@ -1,2 +1,3 @@
-# cloud-native-reference
-Cloud-native reference implementation using Axon, event sourcing, CQRS, Spring Cloud, Netflix OSS.
+# Cloud-Native Reference
+
+Cloud-native reference implementation. Microservice architectural style using CQRS and Event Sourcing design patterns.
