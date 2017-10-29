@@ -36,3 +36,24 @@ Then build the code and all the required Docker container images
 cd cloud-native-reference
 ./gradlew clean image
 ```
+
+## 2. Start the System
+
+## 3. Perform an Integration Test
+
+Run the integration tests with the following...
+
+```bash
+./gradlew integration-test:integrationTest
+```
+
+The architecture makes use of a design pattern called 'event sourcing' with 'eventual consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service. In addition, a demonstration throttling filter in the Gateway service limits traffic to one request every 10 seconds.
+
+## 4. Clean the Docker Containers
+
+The Docker build artifacts will be stored locally. These can be cleaned up to save disk space
+
+```bash
+./clean-docker.sh
+```
+
