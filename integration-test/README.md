@@ -1,4 +1,4 @@
-## Integration Tests - Instructions
+## Integration Tests
 
 The integration tests include an end-to-end test and system health check. They require the mongodb, rabbitmq, configuration-service, service-registry, gateway-service, order-service and order-query-service containers to be up and running.
 
