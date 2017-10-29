@@ -42,7 +42,7 @@ cd cloud-native-reference
 There are several Docker containers that compose the reference system.
 
 * mongodb - MongoDB NoSQL database service for the Axon Framework event store
-* rabbitmq - RabbitMQ service for Axon Framework messaging
+* rabbitmq - RabbitMQ service for Axon Framework event messaging
 * configuration-service - Spring Cloud external configuration service
 * service-registry - Spring Cloud service registry and discovery service
 * gateway-service - Spring Boot gateway service with a Netflix OSS Zuul router and Hystrix circuit breaker
@@ -50,6 +50,20 @@ There are several Docker containers that compose the reference system.
 * order-query-service - Spring Boot CQRS query service for querying (domain) orders
 * admin-service - Spring Cloud Admin Service for service monitoring
 * hystrix-dashboard-service - Netflix OSS Hystrix dashboard service
+
+Issue the following commands in order. Check that each service is started within its container before proceeding to the next container.
+
+```bash
+docker-compose up mongodb
+docker-compose up rabbitmq
+docker-compose up configuration-service
+docker-compose up service-registry
+docker-compose up gateway-service
+docker-compose up order-service
+docker-compose up order-query-service
+docker-compose up admin-service
+docker-compose up hystrix-dashboard-service
+```
 
 ## 3. Execute the Integration Tests
 
