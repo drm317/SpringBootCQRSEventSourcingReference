@@ -49,7 +49,7 @@ Run the integration tests with the following:
 ./gradlew integration-test:integrationTest
 ```
 
-The architecture makes use of a design pattern called 'event sourcing' with 'eventual consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service. In addition, a demonstration throttling filter in the Gateway service currently limits traffic to one request every 10 seconds.
+The architecture makes use of a design pattern called 'Event Sourcing' with 'Eventual Consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service. In addition, a demonstration throttling filter in the Gateway Service currently limits traffic to one request every 10 seconds.
 
 ## 4. Clean the Docker Containers
 

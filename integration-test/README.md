@@ -26,5 +26,5 @@ Run the integration tests with the following...
 ./gradlew integration-test:integrationTest
 ```
 
-The architecture makes use of a design pattern called 'event sourcing' with 'eventual consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service.
+The architecture makes use of a design pattern called 'Event Sourcing' with 'Eventual Consistency'. There is a delay between each test to allow for event messages to propagate from the command service to the query service.
 
