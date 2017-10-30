@@ -73,7 +73,7 @@ docker-compose up hystrix-dashboard-service
 
 ### Architecture
 
-![Architecture](https://github.com/drm317/cloud-native-reference/blob/master/Architecture.jpg "Architecture")
+![Architecture](https://github.com/drm317/cloud-native-reference/Architecture.jpg "Architecture")
 
 ### Microservices
 
