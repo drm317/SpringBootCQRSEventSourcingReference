@@ -9,7 +9,7 @@ This is a reference implementation for a cloud-native architecture. The microser
 * External Configuration Service
 * Throttling
 
-The following technology choices are used:
+The following technologies are used:
 
 * Spring Cloud
 * Netflix OSS
