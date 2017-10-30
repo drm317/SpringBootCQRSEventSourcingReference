@@ -71,21 +71,6 @@ docker-compose up admin-service
 docker-compose up hystrix-dashboard-service
 ```
 
-### Microservices
-
-#### Order Service (Command)
-
-Method	| Path	| Description	
-------------- | ------------------------- | ------------- 
-POST	| /os/order/add/{orderId}?description={description}	| Create a new order
-
-#### Order Query Service (Query)
-
-Method	| Path	| Description	
-------------- | ------------------------- | ------------- 
-GET	| /oqs/orders/{orderId}| Get the specified order
-
-
 ## 3. Execute the Integration Tests
 
 The integration tests include an end-to-end test and system health check. They require the mongodb, rabbitmq, configuration-service, service-registry, gateway-service, order-service and order-query-service containers to be up and running.
