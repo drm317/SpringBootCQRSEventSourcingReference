@@ -57,7 +57,7 @@ There are several Docker containers that compose the reference system.
 * admin-service - Spring Cloud Admin Service for service monitoring
 * hystrix-dashboard-service - Netflix OSS Hystrix dashboard service
 
-Issue the following commands in order. Check that each service is started within its container before proceeding to the next container.
+Issue the following commands in order in separate terminal windows. Check that each service is started within its container before proceeding to the next container.
 
 ```bash
 docker-compose up mongodb
@@ -70,6 +70,15 @@ docker-compose up order-query-service
 docker-compose up admin-service
 docker-compose up hystrix-dashboard-service
 ```
+
+### Microservices
+
+#### Order Service (Command)
+
+Method	| Path	| Description	
+------------- | ------------------------- | ------------- 
+POST	| /os/order/add/{orderId}?description={description}	| Create a new order
+
 
 ## 3. Execute the Integration Tests
 
