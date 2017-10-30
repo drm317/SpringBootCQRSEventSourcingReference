@@ -71,10 +71,6 @@ docker-compose up admin-service
 docker-compose up hystrix-dashboard-service
 ```
 
-### Architecture
-
-![Architecture](https://github.com/drm317/cloud-native-reference/blob/master/Architecture.jpeg "Architecture")
-
 ### Microservices
 
 #### Order Service (Command)
