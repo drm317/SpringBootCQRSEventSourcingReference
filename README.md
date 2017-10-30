@@ -9,6 +9,12 @@ This is a reference implementation for a cloud-native architecture. The microser
 * External Configuration Service
 * Throttling
 
+The following technology choices are used:
+
+* Spring Cloud
+* Netflix OSS
+* Axon Framework
+
 ## Prerequisites
 
 This reference implementation can be run through a series of Docker containers. The following software is required to build and execute the code.
