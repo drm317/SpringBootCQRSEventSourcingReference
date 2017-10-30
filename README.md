@@ -79,6 +79,12 @@ Method	| Path	| Description
 ------------- | ------------------------- | ------------- 
 POST	| /os/order/add/{orderId}?description={description}	| Create a new order
 
+#### Order Query Service (Query)
+
+Method	| Path	| Description	
+------------- | ------------------------- | ------------- 
+GET	| /oqs/orders/{orderId}| Get the specified order
+
 
 ## 3. Execute the Integration Tests
 
